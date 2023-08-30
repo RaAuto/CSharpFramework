@@ -5,19 +5,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Company.Base;
 
 namespace Company.OpenEMRAutomation
 {
-    public class LogiUITest
+    public class LogiUITest : AutomationWrapper
     {
+      
         [Test]
         public void ValidateTitleTest()
         {
-            IWebDriver driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Url = "https://demo.openemr.io/b/openemr";
-            string actualTitle=driver.Title;
-            Assert.AreEqual("OpenEMR Login",actualTitle);
+            string actualTitle = driver.Title;
+            Assert.That(actualTitle,Is.EqualTo("OpenEMR Login"));
+         }
+        [Test]
+        public void ValidatePlaceholderTest() 
+        {
+            string actualUsernamePlaceholder = driver.FindElement(By.Id("authUser")).GetAttribute("placeholder");
+            string actualPasswordPlaceholder = driver.FindElement(By.Id("clearPass")).GetAttribute("placeholder");
+             Assert.That(actualUsernamePlaceholder, Is.EqualTo("Username"));
+             Assert.That(actualPasswordPlaceholder, Is.EqualTo("Password"));
+
         }
+
+       
     }
 }
