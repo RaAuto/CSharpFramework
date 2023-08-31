@@ -22,7 +22,7 @@ namespace Company.Base
         [TearDown]
         public void TearDown()
         {
-            driver.Quit();
+          //  driver.Quit();
         }
     }
 }
